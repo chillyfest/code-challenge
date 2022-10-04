@@ -15,28 +15,43 @@ return total;
 
 const findFrequency = function(array) {
 
-const obj = {};
-let max = 0;
-let mostFreq = null;
+    const obj = {};
+    let max = 0;
+    let min = 0;
+    let mostFreq = null;
+    let leastFreq = null;
+    
+        for (let i=0; i < array.length; i++) {
+            let letter = array[i];
+            
+            if (obj[letter]) {
+                obj[letter]++;
+            } else {
+                obj[letter] = 1;
+            }
+        }
+        for (let x in obj) {
+            if (obj[x] > max){
+                max = obj[x];
+                mostFreq = x;
+            }
+            
+        }
 
-    for (let i=0; i < array.length; i++) {
-        let letter = array[i];
-        
-        if (obj[letter]) {
-            obj[letter]++;
-        } else {
-            obj[letter] = 1;
-        }
-    }
-    for (let x in obj) {
-        if (obj[x] > max){
-            max = obj[x];
-            mostFreq = x;
+        for (let x in obj) {
+            if (obj[x] < max) {
+                min = obj[x];
+                leastFreq = x;
+            }
         }
         
+        return {
+            'most': mostFreq,
+            'least': leastFreq
+        };
+        
     }
-    return mostFreq;
-}
+
 
 
 
@@ -57,19 +72,16 @@ const isPalindrome = function(str) {
 
 
 const largestPair = function(array) {
-    let pairProduct = 0; 
-    let i, newMax = 0;
-    
-    for (i = 0; i < array.length - 1; i++) {
-        let pairProduct = array[i] * array[i+1];
-        if (pairProduct > newMax) {
-            let newMax = pairProduct;
-            
-        } 
-        return pairProduct;
+    let largestProduct = array[0] * array[1];
+    let i;
+
+    for (i = 0; i < array.length; i++) {
+        if ((array[i] * array[i+1]) > largestProduct) {
+            largestProduct = array[i] * array[i+1]   
+        }
     }
-    
-console.log(largestPair([1,2,3,4,5]))
+    return largestProduct;
+
 }
 
 
